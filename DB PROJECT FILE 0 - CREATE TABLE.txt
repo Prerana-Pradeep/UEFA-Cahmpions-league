@@ -1,0 +1,230 @@
+
+ALTER SESSION SET NLS_DATE_FORMAT = 'MM/DD/YYYY';
+/* -- */
+
+CREATE TABLE STADIUM ( 
+STADIUM_ID INTEGER PRIMARY KEY, 
+STA_NAME varchar2(250), 
+STA_CITY varchar2(250), 
+STA_COUNTRY varchar2(250), 
+STA_CAPACITY INTEGER 
+);
+
+CREATE TABLE TEAMS ( 
+TEAM_ID INTEGER PRIMARY KEY, 
+STADIUM_ID INTEGER REFERENCES STADIUM(STADIUM_ID), 
+TEAM_NAME varchar2(250) 
+);
+
+
+CREATE TABLE PLAYER ( 
+PLAYER_ID INTEGER PRIMARY KEY, 
+TEAM_ID INTEGER REFERENCES TEAMS(TEAM_ID), 
+PL_F_NAME varchar2(250), 
+PL_L_NAME varchar2(250), 
+PL_NATIONALITY varchar2(250), 
+PL_DOB DATE, 
+PL_JERSEY_NO INTEGER, 
+PL_POSITION varchar2(250), 
+PL_WEIGHT INTEGER, 
+PL_HEIGHT INTEGER, 
+PL_FOOT VARCHAR2(32)
+);
+
+CREATE TABLE MATCHES ( 
+MATCH_ID INTEGER PRIMARY KEY, 
+HOME_TEAM_ID INTEGER REFERENCES TEAMS(TEAM_ID), 
+AWAY_TEAM_ID INTEGER REFERENCES TEAMS(TEAM_ID), 
+STADIUM_ID INTEGER REFERENCES STADIUM(STADIUM_ID), 
+MA_SEASON varchar2(250), 
+MA_DATE DATE, 
+MA_HOME_SCORE INTEGER, 
+MA_AWAY_SCORE INTEGER, 
+MA_PENALTY INTEGER, 
+MA_ATTENDANCE INTEGER 
+);
+
+CREATE TABLE GOALS ( 
+GOAL_ID INTEGER PRIMARY KEY, 
+MATCH_ID INTEGER REFERENCES MATCHES (MATCH_ID), 
+PID INTEGER REFERENCES PLAYER (PLAYER_ID), 
+ASSIST_PID REFERENCES PLAYER (PLAYER_ID), 
+GOAL_DESC varchar2(250) 
+);
+
+CREATE TABLE MANAGER ( 
+MANAGER_ID INTEGER PRIMARY KEY, 
+TEAM_ID INTEGER REFERENCES TEAMS(TEAM_ID), 
+MAN_F_NAME varchar2(250), 
+MAN_L_NAME varchar2(250), 
+MAN_NATIONALITY varchar2(250), 
+MAN_DOB DATE 
+);
+
+
+INSERT INTO STADIUM VALUES (1,'Giuseppe Meazza','Milano','Italy',75923);
+INSERT INTO STADIUM VALUES (2,'Johan Cruijff ArenA','Amsterdam','Netherlands',54990);
+INSERT INTO STADIUM VALUES (3,'Gewiss Stadium','Bergamo','Italy',26562);
+INSERT INTO STADIUM VALUES (4,'Wanda Metropolitano','Madrid','Spain',68000);
+INSERT INTO STADIUM VALUES (5,'Allianz Arena','München','Germany',75024);
+INSERT INTO STADIUM VALUES (6,'Vodafone Park','Istanbul','Turkey',41903);
+INSERT INTO STADIUM VALUES (7,'Signal Iduna Park','Dortmund','Germany',81365);
+INSERT INTO STADIUM VALUES (8,'Stadion Wankdorf','Bern','Switzerland',32000);
+INSERT INTO STADIUM VALUES (9,'Stamford Bridge','London','England',41837);
+INSERT INTO STADIUM VALUES (10,'Jan Breydel Stadion','Brugge','Belgium',29042);
+INSERT INTO STADIUM VALUES (11,'Olimpiyskyi','Kiev','Ukraine',70050);
+INSERT INTO STADIUM VALUES (12,'Spotify Camp Nou','Barcelona','Spain',99354);
+INSERT INTO STADIUM VALUES (13,'Estádio do Dragão','Porto','Portugal',54378);
+INSERT INTO STADIUM VALUES (14,'Sheriff Stadium','Tiraspol','Moldova',14300);
+INSERT INTO STADIUM VALUES (15,'Allianz Stadium','Torino','Italy',41254);
+INSERT INTO STADIUM VALUES (16,'Stade Pierre Mauroy','Villeneuve D’Ascq','France',50186);
+INSERT INTO STADIUM VALUES (17,'Anfield','Liverpool','England',54074);
+INSERT INTO STADIUM VALUES (18,'Nya Malmö Stadion','Malmö','Sweden',22500);
+INSERT INTO STADIUM VALUES (19,'Etihad Stadium','Manchester','England',55097);
+INSERT INTO STADIUM VALUES (20,'Old Trafford','Manchester','England',74140);
+INSERT INTO STADIUM VALUES (21,'Parc des Princes','Paris','France',48712);
+INSERT INTO STADIUM VALUES (22,'Red Bull Arena','Leipzig','Germany',42558);
+INSERT INTO STADIUM VALUES (23,'Red Bull Arena','Wals-Siezenheim','Austria',31895);
+INSERT INTO STADIUM VALUES (24,'Santiago Bernabéu','Madrid','Spain',81044);
+INSERT INTO STADIUM VALUES (25,'Ramón Sánchez Pizjuán','Sevilla','Spain',43883);
+INSERT INTO STADIUM VALUES (26,'Donbass Arena','Donetsk','Ukraine',52518);
+INSERT INTO STADIUM VALUES (27,'Estádio da Luz','Lisboa','Portugal',65272);
+INSERT INTO STADIUM VALUES (28,'Estádio José Alvalade','Lisboa','Portugal',52000);
+INSERT INTO STADIUM VALUES (29,'Volkswagen Arena','Wolfsburg','Germany',30000);
+INSERT INTO STADIUM VALUES (30,'Estadio de la Cerámica','Villarreal','Spain',23500);
+INSERT INTO STADIUM VALUES (31,'Gazprom Arena','St. Petersburg','Russia',68134);
+INSERT INTO STADIUM VALUES (32,'Stade de France','Paris - St. Denis','France',81338);
+INSERT INTO STADIUM VALUES (33,'Borussia-Park','Mönchengladbach','Germany',54022);
+INSERT INTO STADIUM VALUES (34,'MCH Arena','Herning','Denmark',11535);
+INSERT INTO STADIUM VALUES (35,'Groupama Aréna','Budapest','Hungary',23700);
+INSERT INTO STADIUM VALUES (36,'Krasnodar Stadium','Krasnodar','Russia',34652);
+INSERT INTO STADIUM VALUES (37,'Fatih Terim Stadium','Istanbul','Turkey',17319);
+INSERT INTO STADIUM VALUES (38,'Olimpico','Roma','Italy',70634);
+INSERT INTO STADIUM VALUES (39,'RŽD-Arena','Moskva','Russia',27320);
+INSERT INTO STADIUM VALUES (40,'Georgios Karaiskakis','Piräus','Greece',33334);
+INSERT INTO STADIUM VALUES (41,'Vélodrome','Marseille','France',67394);
+INSERT INTO STADIUM VALUES (42,'Roazhon Park','Rennes','France',29778);
+INSERT INTO STADIUM VALUES (43,'Alfredo Di Stéfano','Madrid','Spain',9000);
+INSERT INTO STADIUM VALUES (44,'Puskás Aréna','Budapest','Hungary',67215);
+INSERT INTO STADIUM VALUES (45,'Arena Națională','Bucuresti','Romania',55611);
+INSERT INTO STADIUM VALUES (46,'BayArena','Leverkusen','Germany',30210);
+INSERT INTO STADIUM VALUES (47,'Marakana','Beograd','Serbia',55538);
+INSERT INTO STADIUM VALUES (48,'Maksimir','Zagreb','Croatia',38079);
+INSERT INTO STADIUM VALUES (49,'Nef Stadyumu','Istanbul','Turkey',52280);
+INSERT INTO STADIUM VALUES (50,'Cegeka Arena','Genk','Belgium',24956);
+INSERT INTO STADIUM VALUES (51,'Groupama Stadium','Décines-Charpieu','France',59186);
+INSERT INTO STADIUM VALUES (52,'Sinobo Stadium','Praha','Czech Republic',19370);
+INSERT INTO STADIUM VALUES (53,'Diego Maradona','Napoli','Italy',60240);
+INSERT INTO STADIUM VALUES (54,'Tottenham Hotspur Stadium','London','England',62062);
+INSERT INTO STADIUM VALUES (55,'Estadio de Mestalla','Valencia','Spain',55000);
+INSERT INTO STADIUM VALUES (56,'Metalist Stadion','Kharkiv','Ukraine',41307);
+INSERT INTO STADIUM VALUES (57,'PreZero Arena','Sinsheim','Germany',30150);
+INSERT INTO STADIUM VALUES (58,'Agia Sophia Stadium','Athen','Greece',30597);
+INSERT INTO STADIUM VALUES (59,'Stade Louis II','Monaco','France',18524);
+INSERT INTO STADIUM VALUES (60,'VEB Arena','Moskva','Russia',30000);
+INSERT INTO STADIUM VALUES (61,'Veltins-Arena','Gelsenkirchen','Germany',62271);
+INSERT INTO STADIUM VALUES (62,'Philips Stadion','Eindhoven','Netherlands',35000);
+INSERT INTO STADIUM VALUES (63,'Doosan Arena','Plzeň','Czech Republic',12500);
+INSERT INTO STADIUM VALUES (64,'Wembley Stadium','London','England',90000);
+INSERT INTO STADIUM VALUES (65,'Spyros Louis (OAKA);','Athen','Greece',71030);
+INSERT INTO STADIUM VALUES (66,'Luzhniki','Moskva','Russia',80840);
+INSERT INTO STADIUM VALUES (67,'Neo GSP Stadium','Nikosia','Cyprus',23650);
+INSERT INTO STADIUM VALUES (68,'Celtic Park','Glasgow','Scotland',60832);
+INSERT INTO STADIUM VALUES (69,'St. Jakob-Park','Basel','Switzerland',38512);
+INSERT INTO STADIUM VALUES (70,'De Kuip','Rotterdam','Netherlands',51177);
+INSERT INTO STADIUM VALUES (71,'Ljudski vrt','Maribor','Slovenia',12994);
+INSERT INTO STADIUM VALUES (72,'Qarabağ Stadium','Baku','Azerbaijan',4735);
+INSERT INTO STADIUM VALUES (73,'Lotto Park','Bruxelles','Belgium',22500);
+INSERT INTO STADIUM VALUES (74,'Otkrytie Arena','Moskva','Russia',44929);
+INSERT INTO STADIUM VALUES (75,'Baku National Stadium','Baku','Azerbaijan',68700);
+INSERT INTO STADIUM VALUES (76,'Emirates Stadium','London','England',60704);
+INSERT INTO STADIUM VALUES (77,'Telia Parken','København','Denmark',38076);
+INSERT INTO STADIUM VALUES (78,'Rostov Arena','Rostov-na-Donu','Russia',45000);
+INSERT INTO STADIUM VALUES (79,'Stadion Wojska Polskiego','Warszawa','Poland',31103);
+INSERT INTO STADIUM VALUES (80,'King Power Stadium','Leicester','England',32500);
+INSERT INTO STADIUM VALUES (81,'Huvepharma Arena','Razgrad','Bulgaria',9000);
+INSERT INTO STADIUM VALUES (82,'Vasil Levski','Sofia','Bulgaria',43632);
+INSERT INTO STADIUM VALUES (83,'Vicente Calderón','Madrid','Spain',54851);
+INSERT INTO STADIUM VALUES (84,'Olimp – 2','Rostov-na-Donu','Russia',15840);
+INSERT INTO STADIUM VALUES (85,'Arena Khimki','Khimki','Russia',18636);
+INSERT INTO STADIUM VALUES (86,'Millennium','Cardiff','Wales',74500);
+INSERT INTO STADIUM VALUES (-1,'No Team','No Team','No Team',-1);
+
+
+
+INSERT INTO TEAMS VALUES (1,1,'AC Milan');
+INSERT INTO TEAMS VALUES (2,2,'AFC Ajax');
+INSERT INTO TEAMS VALUES (3,3,'Atalanta');
+INSERT INTO TEAMS VALUES (4,4,'Atlético Madrid');
+INSERT INTO TEAMS VALUES (5,5,'Bayern München');
+INSERT INTO TEAMS VALUES (6,6,'Beşiktaş');
+INSERT INTO TEAMS VALUES (7,7,'Borussia Dortmund');
+INSERT INTO TEAMS VALUES (8,8,'BSC Young Boys');
+INSERT INTO TEAMS VALUES (9,9,'Chelsea FC');
+INSERT INTO TEAMS VALUES (10,10,'Club Brugge KV');
+INSERT INTO TEAMS VALUES (11,11,'Dinamo Kiev');
+INSERT INTO TEAMS VALUES (12,12,'FC Barcelona');
+INSERT INTO TEAMS VALUES (13,13,'FC Porto');
+INSERT INTO TEAMS VALUES (14,14,'FC Sheriff');
+INSERT INTO TEAMS VALUES (15,1,'Inter');
+INSERT INTO TEAMS VALUES (16,15,'Juventus');
+INSERT INTO TEAMS VALUES (17,16,'Lille OSC');
+INSERT INTO TEAMS VALUES (18,17,'Liverpool FC');
+INSERT INTO TEAMS VALUES (19,18,'Malmö FF');
+INSERT INTO TEAMS VALUES (20,19,'Manchester City');
+INSERT INTO TEAMS VALUES (21,20,'Manchester United');
+INSERT INTO TEAMS VALUES (22,21,'Paris Saint-Germain');
+INSERT INTO TEAMS VALUES (23,22,'RB Leipzig');
+INSERT INTO TEAMS VALUES (24,22,'RB Salzburg');
+INSERT INTO TEAMS VALUES (25,24,'Real Madrid');
+INSERT INTO TEAMS VALUES (26,25,'Sevilla FC');
+INSERT INTO TEAMS VALUES (27,26,'Shakhtar Donetsk');
+INSERT INTO TEAMS VALUES (28,27,'SL Benfica');
+INSERT INTO TEAMS VALUES (29,28,'Sporting CP');
+INSERT INTO TEAMS VALUES (30,29,'VfL Wolfsburg');
+INSERT INTO TEAMS VALUES (31,30,'Villarreal CF');
+INSERT INTO TEAMS VALUES (32,31,'Zenit St. Petersburg');
+INSERT INTO TEAMS VALUES (33,33,'Bor. Mönchengladbach');
+INSERT INTO TEAMS VALUES (34,34,'FC Midtjylland');
+INSERT INTO TEAMS VALUES (35,35,'Ferencvárosi TC');
+INSERT INTO TEAMS VALUES (36,36,'FK Krasnodar');
+INSERT INTO TEAMS VALUES (37,37,'İstanbul Başakşehir');
+INSERT INTO TEAMS VALUES (38,38,'Lazio Roma');
+INSERT INTO TEAMS VALUES (39,39,'Lokomotiv Moskva');
+INSERT INTO TEAMS VALUES (40,40,'Olympiakos Piraeus');
+INSERT INTO TEAMS VALUES (41,41,'Olympique Marseille');
+INSERT INTO TEAMS VALUES (42,42,'Stade Rennes');
+INSERT INTO TEAMS VALUES (43,46,'Bayer Leverkusen');
+INSERT INTO TEAMS VALUES (44,47,'Crvena Zvezda');
+INSERT INTO TEAMS VALUES (45,48,'Dinamo Zagreb');
+INSERT INTO TEAMS VALUES (46,49,'Galatasaray');
+INSERT INTO TEAMS VALUES (47,50,'KRC Genk');
+INSERT INTO TEAMS VALUES (48,51,'Olympique Lyon');
+INSERT INTO TEAMS VALUES (49,52,'Slavia Praha');
+INSERT INTO TEAMS VALUES (50,53,'SSC Napoli');
+INSERT INTO TEAMS VALUES (51,54,'Tottenham Hotspur');
+INSERT INTO TEAMS VALUES (52,55,'Valencia CF');
+INSERT INTO TEAMS VALUES (53,57,'1899 Hoffenheim');
+INSERT INTO TEAMS VALUES (54,58,'AEK Athen');
+INSERT INTO TEAMS VALUES (55,59,'AS Monaco');
+INSERT INTO TEAMS VALUES (56,38,'AS Roma');
+INSERT INTO TEAMS VALUES (57,60,'CSKA Moskva');
+INSERT INTO TEAMS VALUES (58,61,'FC Schalke 04');
+INSERT INTO TEAMS VALUES (59,62,'PSV Eindhoven');
+INSERT INTO TEAMS VALUES (60,63,'Viktoria Plzeň');
+INSERT INTO TEAMS VALUES (61,67,'APOEL Nikosia');
+INSERT INTO TEAMS VALUES (62,68,'Celtic FC');
+INSERT INTO TEAMS VALUES (63,69,'FC Basel');
+INSERT INTO TEAMS VALUES (64,70,'Feyenoord');
+INSERT INTO TEAMS VALUES (65,71,'NK Maribor');
+INSERT INTO TEAMS VALUES (66,72,'Qarabağ FK');
+INSERT INTO TEAMS VALUES (67,73,'RSC Anderlecht');
+INSERT INTO TEAMS VALUES (68,74,'Spartak Moskva');
+INSERT INTO TEAMS VALUES (69,76,'Arsenal FC');
+INSERT INTO TEAMS VALUES (70,77,'FC København');
+INSERT INTO TEAMS VALUES (71,78,'FK Rostov');
+INSERT INTO TEAMS VALUES (72,79,'Legia Warszawa');
+INSERT INTO TEAMS VALUES (73,80,'Leicester City');
+INSERT INTO TEAMS VALUES (74,81,'PFC Ludogorets Razgrad');
+INSERT INTO TEAMS VALUES (-1,-1,'No Team');
+INSERT INTO TEAMS VALUES (-2,-1,'Free Agent');
